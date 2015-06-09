@@ -2215,7 +2215,7 @@
       while (object != null && index < length) {
         object = toObject(object)[path[index++]];
       }
-      return (index && index == length) ? object : undefined;
+      return (index == length) ? object : undefined;
     }
 
     /**
@@ -10060,10 +10060,10 @@
     function result(object, path, defaultValue) {
       var result = object == null ? undefined : toObject(object)[path];
       if (result === undefined) {
+        path = toPath(path);
         if (object != null && !isKey(path, object)) {
-          path = toPath(path);
           object = path.length == 1 ? object : baseGet(object, baseSlice(path, 0, -1));
-          result = object == null ? undefined : toObject(object)[last(path)];
+          result = object == null ? undefined : get(object, last(path));
         }
         result = result === undefined ? defaultValue : result;
       }

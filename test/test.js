@@ -13444,7 +13444,7 @@
 
     test('`_.' + methodName + '` should handle empty paths', 4, function() {
       _.each([['', ''], [[], ['']]], function(pair) {
-        strictEqual(func({}, pair[0]), undefined);
+        deepEqual(func({}, pair[0]), {});
         strictEqual(func({ '': 3 }, pair[1]), 3);
       });
     });
